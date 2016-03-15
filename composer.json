@@ -1,5 +1,5 @@
 {
-    "name": "queencitycodefactory/ldap",
+    "name": "rubyan/ldap",
     "description": "LDAP plugin for CakePHP 3.x",
     "type": "cakephp-plugin",
     "keywords":[
@@ -7,18 +7,18 @@
         "authenticate",
         "ldap"
     ],
-    "homepage": "http://github.com/QueenCityCodeFactory/LDAP",
+    "homepage": "http://github.com/Rubyan/LDAP",
     "authors":[
         {
-            "name":"darensipes",
+            "name":"rubyan",
             "role":"Author",
-            "homepage":"https://github.com/darensipes"
-        }
+            "homepage":"https://github.com/rubyan"
+        },		
     ],
     "license": "MIT",
     "support":{
-        "source":"https://github.com/QueenCityCodeFactory/LDAP",
-        "issues":"https://github.com/QueenCityCodeFactory/LDAP/issues"
+        "source":"https://github.com/Rubyan/LDAP",
+        "issues":"https://github.com/Rubyan/LDAP/issues"
     },
     "require": {
         "php": ">=5.4.16",
@@ -29,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "QueenCityCodeFactory\\LDAP\\": "src"
+            "Rubyan\\LDAP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "QueenCityCodeFactory\\LDAP\\Test\\": "tests"
+            "Rubyan\\LDAP\\Test\\": "tests"
         }
     }
 }

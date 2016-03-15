@@ -1,6 +1,7 @@
 # LDAP Authenticate plugin
 LDAP Authenticate Plugin for CakePHP 3.x and AuthComponent.
 
+based on the excellent work of queencitycodefactory/ldap
 ## Requirements
 * CakePHP 3.0
 * php5-ldap module
@@ -13,14 +14,14 @@ You can install this plugin into your CakePHP application using [composer](http:
 The recommended way to install composer packages is:
 
 ```
-composer require queencitycodefactory/ldap
+composer require rubyan/ldap
 ```
 
-You can also add `"queencitycodefactory/ldap" : "dev-master"` to `require` section in your application's `composer.json`.
+You can also add `"rubyan/ldap" : "dev-master"` to `require` section in your application's `composer.json`.
 
 ## Usage
 
-In your app's `config/bootstrap.php` add: `Plugin::load('QueenCityCodeFactory/LDAP');`
+In your app's `config/bootstrap.php` add: `Plugin::load('Rubyan/LDAP');`
 
 ## Configuration:
 
@@ -40,7 +41,7 @@ Setup the authentication class settings
             ],
             'authError' => 'Insufficient privileges to view requested resources. Please login to continue!',
             'authenticate' => [
-                'QueenCityCodeFactory/LDAP.Ldap' => [
+                'Rubyan/LDAP.Ldap' => [
                     'fields' => [
                         'username' => 'username',
                         'password' => 'password'
