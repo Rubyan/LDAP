@@ -131,11 +131,27 @@ class LdapAuthenticate extends BaseAuthenticate
 
         try {
             $ldapBind = ldap_bind($this->ldapConnection, $username, $password);
+            $baseDN = $this->_config['baseDN']($username, $this->_config['domain']);
             if ($ldapBind === true) {
-                $searchResults = ldap_search($this->ldapConnection, $this->_config['baseDN']($username, $this->_config['domain']), '(' . $this->_config['search'] . '=' . $username . ')');
+                $searchResults = ldap_search($this->ldapConnection, 
+                    $this->_config['baseDN']($username, $this->_config['domain']), 
+                    $this->_config['search']($username, $this->_config['domain']), 
+                    $this->_config['attributes']); // ["samaccountname","mail"]);
                 $results = ldap_get_entries($this->ldapConnection, $searchResults);
                 $entry = ldap_first_entry($this->ldapConnection, $searchResults);
-                return ldap_get_attributes($this->ldapConnection, $entry);
+                $attrs = ldap_get_attributes($this->ldapConnection, $entry);
+                
+                $user  = [];
+                // Loop
+                for ($i = 0 ; $i < $attrs["count"] ; $i++) {
+                    $user[$attrs[$i]] = ldap_get_values ($this->ldapConnection, $entry, $attrs[$i])[0] ;
+                }
+                //replace key
+                $user['username'] = $user['sAMAccountName'];
+                unset($user['sAMAccountName']);
+
+                // Then return the authenticated user
+                return $user ;
             }
         } catch (\ErrorException $e) {
             $this->log($e->getMessage());

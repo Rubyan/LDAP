@@ -78,11 +78,15 @@ config/app.php:
      * - `host` - The domain controller hostname. This can be a closure or a string.
      *    The closure allows you to modify the rules in the configuration without the
      *    need to modify the LDAP plugin. One host (string) should be returned when
-     *    using closure.
+     *    using closure. You can find your ldap servers with the following command:
+     *      host -t srv _ldap._tcp.YOURDOMAIN.LOCAL
+     * - `port` - The port to use. Default is 389 and is not required.
+     * - `search` - The attribute to search against. Usually 'UserPrincipalName'
      * - `baseDN` - The base DN for directory - Closure must be used here, the plugin
      *    is expecting a closure object to be set.
-     * - `search` - The attribute to search against. Usually 'UserPrincipalName'
-     * - `port` - The port to use. Default is 389 and is not required.
+     * - `attributes` - An array of the required attributes, e.g. ["mail", "sn", "cn"]. 
+     *    Note that the "dn" is always returned irrespective of which attributes types are 
+     *    requested.
      * - `errors` - Array of errors where key is the error and the value is the error
      *    message. Set in session to Flash.ldap for flashing
      *
@@ -106,6 +110,7 @@ config/app.php:
             }
             return $baseDN;
         },
+        'attributes' => 
         'errors' => [
             'data 773' => 'Some error for Flash',
             'data 532' => 'Some error for Flash',
