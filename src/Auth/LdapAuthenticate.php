@@ -146,7 +146,7 @@ class LdapAuthenticate extends BaseAuthenticate
                 for ($i = 0 ; $i < $attrs["count"] ; $i++) {
                     $user[$attrs[$i]] = ldap_get_values ($this->ldapConnection, $entry, $attrs[$i])[0] ;
                 }
-                $user = array_change_key_case($user, CASE_UPPER );
+                $user = array_change_key_case($user, CASE_LOWER);
 
                 return $user ;
             }
