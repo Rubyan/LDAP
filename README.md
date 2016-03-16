@@ -110,7 +110,7 @@ config/app.php:
             }
             return $baseDN;
         },
-        'attributes' => 
+        'attributes' => ['samaccountname','mail', 'displayname'],
         'errors' => [
             'data 773' => 'Some error for Flash',
             'data 532' => 'Some error for Flash',

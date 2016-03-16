@@ -142,15 +142,12 @@ class LdapAuthenticate extends BaseAuthenticate
                 $attrs = ldap_get_attributes($this->ldapConnection, $entry);
                 
                 $user  = [];
-                // Loop
+                
                 for ($i = 0 ; $i < $attrs["count"] ; $i++) {
                     $user[$attrs[$i]] = ldap_get_values ($this->ldapConnection, $entry, $attrs[$i])[0] ;
                 }
-                //replace key
-                $user['username'] = $user['sAMAccountName'];
-                unset($user['sAMAccountName']);
+                $user = array_change_key_case($user, CASE_UPPER );
 
-                // Then return the authenticated user
                 return $user ;
             }
         } catch (\ErrorException $e) {
