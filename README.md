@@ -19,6 +19,10 @@ composer require rubyan/ldap
 
 You can also add `"rubyan/ldap" : "dev-master"` to `require` section in your application's `composer.json`.
 
+Enable ldap in php.ini:
+```
+extension=php_ldap.dll
+```
 ## Usage
 
 In your app's `config/bootstrap.php` add: `Plugin::load('Rubyan/LDAP');`
@@ -93,18 +97,27 @@ config/app.php:
      * @link http://php.net/manual/en/function.ldap-search.php - for more info on ldap search
      */
     'Ldap' => [
-        'domain' => 'example.com',
+        'domain' => 'alliander.local',
         'host' => function() {
-            $hosts = ['192.168.1.13', '127.0.0.1'];
+            $hosts = [
+                'host1.domain.local', 
+                'host2.domain.local'
+            ];
             shuffle($hosts);
             return $hosts[0];
         },
-        //'host' => '127.0.0.1',
         'port' => 389,
-        'search' => 'UserPrincipalName',
+        'search' => function($username, $domain) {
+            if (strpos($username, $domain) !== false) {
+                // remove the @domain from username 
+                $username = str_replace('@' . $domain, '', $username);
+            }
+            $search = '(&(objectCategory=person)(samaccountname=' . $username. '))';
+            return $search;
+        },           
         'baseDN' => function($username, $domain) {
             if (strpos($username, $domain) !== false) {
-                $baseDN = 'OU=example,DC=domain,DC=local';
+                $baseDN = 'OU=Domain,DC=domain,DC=local';
             } else {
                 $baseDN = 'CN=Users,DC=domain,DC=local';
             }
@@ -115,5 +128,6 @@ config/app.php:
             'data 773' => 'Some error for Flash',
             'data 532' => 'Some error for Flash',
         ]
-    ]
+    ],
+
 ```

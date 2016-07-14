@@ -91,7 +91,6 @@ class LdapAuthenticate extends BaseAuthenticate
     public function __destruct()
     {
         @ldap_unbind($this->ldapConnection);
-        @ldap_close($this->ldapConnection);
     }
 
     /**
