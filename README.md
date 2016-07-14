@@ -97,7 +97,7 @@ config/app.php:
      * @link http://php.net/manual/en/function.ldap-search.php - for more info on ldap search
      */
     'Ldap' => [
-        'domain' => 'alliander.local',
+        'domain' => 'domain.local',
         'host' => function() {
             $hosts = [
                 'host1.domain.local', 
