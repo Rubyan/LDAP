@@ -1,11 +1,12 @@
 # LDAP Authenticate plugin
 LDAP Authenticate Plugin for CakePHP 3.x and AuthComponent.
-
 based on the excellent work of queencitycodefactory/ldap
-## Requirements
-* CakePHP 3.0
-* php5-ldap module
 
+**This branch is for CakePHP 3.6+**
+
+## Requirements
+* CakePHP 3.x (updated to CakePHP 3.6)
+* php5-ldap module
 
 ## Installation
 
@@ -25,8 +26,10 @@ extension=php_ldap.dll
 ```
 ## Usage
 
-In your app's `config/bootstrap.php` add: `Plugin::load('Rubyan/LDAP');`
-
+In your app's `src/Application.php` in function: `bootstrap()` add:
+```
+$this->addPlugin('Rubyan/LDAP');
+```
 ## Configuration:
 
 Setup the authentication class settings
